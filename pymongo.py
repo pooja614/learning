@@ -2,6 +2,17 @@
 """ 
 pip install pymongo
 
+Database
+•	Database is a container for collections.
+•	Each database gets its own set of files.
+•	A single MongoDB server can has multiple databases.
+Collection
+•	Collection is a group of documents.
+•	Collection is equivalent to RDBMS table.
+•	A collection consist inside a single database.
+•	Collections do not enforce a schema.
+•	A Collection can have different fields within a Documents.
+
 
 """ 
 import pymongo
