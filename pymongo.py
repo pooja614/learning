@@ -81,4 +81,32 @@ post_count = collection.count_documents({})
 print(post_count)
 # https://www.youtube.com/watch?v=rE_bJl2GAY8 
 
+db.inventory.insertMany([
+    {_id:1, item:{name: "ab", code: "123"}, qty:15, tags:["A", "B", "C"]},
+    {_id:2, item:{name: "cd", code: "123"}, qty:20, tags:["B"]},
+    { _id: 3, item: { name: "ij", code: "456" }, qty: 25, tags: [ "A", "B" ] },
+    { _id: 4, item: { name: "xy", code: "456" }, qty: 30, tags: [ "B", "A" ] },
+    { _id: 5, item: { name: "mn", code: "000" }, qty: 20, tags: [ [ "A", "B" ], "C" ] }
+] )
 
+db.inventory.find({tags: ["A","B"]})
+
+
+# Output:
+
+# { "acknowledged" : true, "insertedIds" : [ 1, 2, 3, 4, 5 ] }
+# { "_id" : 3, "item" : { "name" : "ij", "code" : "456" }, "qty" : 25, "tags" : [ "A", "B" ] }
+# { "_id" : 5, "item" : { "name" : "mn", "code" : "000" }, "qty" : 20, "tags" : [ [ "A", "B" ], "C" ] }  
+
+# Query and Prjections
+
+db.inventory.find( { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] } ) 
+
+
+# Getting dates
+
+var start = new Date("2016-07-30")/1000,
+    end = new Date("2016-08-01")/1000;
+db.dataProfTable.find({
+    "timestamp": { "$gte": start, "$lte": end }
+}) 
